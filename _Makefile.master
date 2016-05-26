@@ -502,7 +502,7 @@ ifndef LIB_DIRS
 # Step 1: Gather the primary directories
 
 ifdef THIRD_PARTY_HARDWARE
-	PRILIB_DIRS = $(shell for i in `$(FIND) . \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.ino' \) -exec $(GREP) '\#include.*<.*>' \{\} \; 2>/dev/null| $(SED) 's/\.h.*>.*$$//g' | $(SED) 's/.*<//g' ` ; { $(FIND) $(THIRD_PARTY_HARDWARE)/libraries/$$i -maxdepth 2 -name $$i.h -exec $(DIRNAME) \{\} \; ;} 2>/dev/null | $(UNIQ) )
+	PRILIB_DIRS = $(shell for i in `$(FIND) . \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.ino' \) -exec $(GREP) '\#include.*<.*>' \{\} \; 2>/dev/null| $(SED) 's/>.*$$//g' | $(SED) 's/.*<//g' ` ; { $(FIND) $(THIRD_PARTY_HARDWARE)/libraries -maxdepth 2 -name $$i -exec $(DIRNAME) \{\} \; ;} 2>/dev/null | $(UNIQ) )
 endif
 
 PRILIB_DIRS += $(shell for i in `$(FIND) . \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.ino' \) -exec $(GREP) '\#include.*<.*>' \{\} \; 2>/dev/null | $(SED) 's/>.*$$//g' | $(SED) 's/.*<//g' ` ; { $(FIND) ../libraries -maxdepth 2 -name $$i -exec $(DIRNAME) \{\} \; ;} 2>/dev/null | $(UNIQ) )
